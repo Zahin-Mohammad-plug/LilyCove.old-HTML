@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pokemon Card Catalog</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="logo">Lilly Cove</div>
+      <input type="text" placeholder="Search for cards, sets, tcg" />
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="sets.html">Pokemon</a>
+      </nav>
+      <div class="user-icons">
+        <i class="fas fa-user"></i>
+        <!-- User Icon -->
+        <i class="fas fa-sign-out-alt"></i>
+        <!-- Logout Icon -->
+        <i class="fas fa-bell"></i>
+        <!-- Notifications Icon -->
+      </div>
+    </header>
+
+    <main>
+      <section class="catalog-header">
+        <h1>SV: Paradox Rift</h1>
+
+        <!-- Card count, sort options, and search bar in a flex container -->
+        <div class="card-controls">
+          <div class="sort-options">
+            <label for="sort">Sort By:</label>
+            <select id="sort" onchange="sortCards()">
+              <option value="rarity">Rarity (Rarest First)</option>
+              <option value="price-low-high">Price (Low to High)</option>
+              <option value="price-high-low">Price (High to Low)</option>
+              <option value="name-a-z">Name (A to Z)</option>
+              <option value="name-z-a">Name (Z to A)</option>
+            </select>
+          </div>
+
+          <span class="card-count">177 Cards Total</span>
+
+          <!-- Search Bar -->
+          <div class="cards-search-bar">
+            <input type="text" id="card-search" placeholder="Search for Cards" /> <!-- FIXED ID -->
+            <button><i class="fas fa-search"></i></button>
+          </div>
+        </div>
+      </section>
+
+      <hr class="divider"> <!-- Divider line below the language options -->
+
+      <section class="cards-grid" id="cards-grid">
+        <a href="card.html" class="cards-item" data-name="Squirtle" data-price="25.11" data-rarity="0">
+          <img src="./images/cards/Squirtle.png" alt="Squirtle" />
+          <h3>Squirtle</h3>
+          <p>Illustration Rare</p>
+          <p>$25.11</p>
+        </a>
+
+        <a href="card.html" class="cards-item" data-name="Yveltal" data-price="14.34" data-rarity="1">
+          <img src="./images/cards/yveltal.png" alt="Yveltal" />
+          <h3>Yveltal</h3>
+          <p>Illustration Rare</p>
+          <p>$14.34</p>
+        </a>
+
+        <a href="card.html" class="cards-item" data-name="Groudon" data-price="18.69" data-rarity="2">
+          <img src="./images/cards/groudon.png" alt="Groudon" />
+          <h3>Groudon</h3>
+          <p>Illustration Rare</p>
+          <p>$18.69</p>
+        </a>
+
+        <a href="card.html" class="cards-item" data-name="Mienshao" data-price="4.99" data-rarity="3">
+          <img src="./images/cards/mienshao.png" alt="Mienshao" />
+          <h3>Mienshao</h3>
+          <p>Illustration Rare</p>
+          <p>$4.99</p>
+        </a>
+
+        <a href="card.html" class="cards-item" data-name="Garchomp" data-price="84.66" data-rarity="1">
+          <img src="./images/cards/garchomp.png" alt="Garchomp" />
+          <h3>Garchomp</h3>
+          <p>Illustration Rare</p>
+          <p>$84.66</p>
+        </a>
+
+        <a href="card.html" class="cards-item" data-name="Iron Hands" data-price="36.78" data-rarity="2">
+          <img src="./images/cards/iron_hands.png" alt="Iron Hands" />
+          <h3>Iron Hands</h3>
+          <p>Illustration Rare</p>
+          <p>$36.78</p>
+        </a>
+
+        <a href="card.html" class="cards-item" data-name="Iron Jugulis" data-price="52.08" data-rarity="3">
+          <img src="./images/cards/iron_jugulis.png" alt="Iron Jugulis" />
+          <h3>Iron Jugulis</h3>
+          <p>Illustration Rare</p>
+          <p>$52.08</p>
+        </a>
+      </section>
+    </main>
+
+    <script>
+      // Search Functionality
+      document.getElementById('card-search').addEventListener('input', function () {
+        const query = this.value.toLowerCase();
+        const cards = document.querySelectorAll('.cards-item');
+
+        cards.forEach(card => {
+          const cardName = card.getAttribute('data-name').toLowerCase();
+
+          // Show/Hide card based on whether it matches the search query
+          if (cardName.includes(query)) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+
+      // Sort Functionality
+      function sortCards() {
+        const sortBy = document.getElementById('sort').value;
+        const cardsGrid = document.getElementById('cards-grid');
+        const cards = Array.from(document.querySelectorAll('.cards-item'));
+
+        let sortedCards;
+
+        if (sortBy === 'price-low-high') {
+          sortedCards = cards.sort((a, b) => parseFloat(a.getAttribute('data-price')) - parseFloat(b.getAttribute('data-price')));
+        } else if (sortBy === 'price-high-low') {
+          sortedCards = cards.sort((a, b) => parseFloat(b.getAttribute('data-price')) - parseFloat(a.getAttribute('data-price')));
+        } else if (sortBy === 'name-a-z') {
+          sortedCards = cards.sort((a, b) => a.getAttribute('data-name').localeCompare(b.getAttribute('data-name')));
+        } else if (sortBy === 'name-z-a') {
+          sortedCards = cards.sort((a, b) => b.getAttribute('data-name').localeCompare(a.getAttribute('data-name')));
+        } else if (sortBy === 'rarity') {
+          sortedCards = cards.sort((a, b) => parseInt(a.getAttribute('data-rarity')) - parseInt(b.getAttribute('data-rarity')));
+        }
+
+        // Clear the grid and append the sorted cards
+        cardsGrid.innerHTML = '';
+        sortedCards.forEach(card => cardsGrid.appendChild(card));
+      }
+    </script>
+  </body>
+</html>
