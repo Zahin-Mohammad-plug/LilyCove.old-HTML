@@ -359,29 +359,16 @@
     transform: scale(1.05); /* Slight zoom effect on hover */
   }
 
-  /* Set title text hidden by default */
   .expansion-item p {
-    display: none; /* Hide the title */
-    position: absolute;
-    background-color: rgba(0, 0, 0, 0.8); /* Dark background with transparency */
-    color: #00c295; /* White text */
-    padding: 5px 10px; /* Padding inside the tooltip */
-    border-radius: 5px; /* Rounded corners */
-    white-space: nowrap; /* Prevent text wrapping */
-    z-index: 10; /* Ensure it's above other elements */
-    pointer-events: none; /* Allow mouse events to pass through */
+    font-size: 1rem; /* Font size tweak */
+    color: #00c295; /* Vibrant text color */
+    margin-top: 5px;
+    text-align: center;
   }
-
-  /* Show the text box when hovering over the image */
-  .expansion-item:hover p {
-    display: block; /* Show title when hovering */
+  
+  .expansion-item p:hover {
+    color: #52dab6; /* Hover effect for text */
   }
-
-  /* Move the tooltip dynamically based on mouse position */
-  .expansion-item {
-    position: relative; /* Relative positioning to position the title dynamically */
-  }
-
   
   /* Catalog Page (for card grid) */
   .catalog-header {

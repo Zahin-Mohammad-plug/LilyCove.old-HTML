@@ -69,24 +69,6 @@
 			</a>
     </section>
   </main>
-  <script>
-	const expansionItems = document.querySelectorAll('.expansion-item');
   
-	expansionItems.forEach(item => {
-	  item.addEventListener('mousemove', (e) => {
-		const tooltip = item.querySelector('p');
-		const x = e.clientX - item.getBoundingClientRect().left + 10; // Offset to the right
-		const y = e.clientY - item.getBoundingClientRect().top + 10;  // Offset to the bottom
-		tooltip.style.left = `${x}px`;
-		tooltip.style.top = `${y}px`;
-	  });
-  
-	  item.addEventListener('mouseleave', () => {
-		const tooltip = item.querySelector('p');
-		tooltip.style.left = `0`;  // Reset position when not hovering
-		tooltip.style.top = `0`;
-	  });
-	});
-  </script>
 </body>
 </html>
