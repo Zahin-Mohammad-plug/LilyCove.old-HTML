@@ -1,23 +1,53 @@
 @import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,900");
 
 
-html, body, div, span, applet, object,
-iframe, h1, h2, h3, h4, h5, h6, p, blockquote,
-pre, a, abbr, acronym, address, big, cite,
-code, del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var, b,
-u, i, center, dl, dt, dd, ol, ul, li, fieldset,
-form, label, legend, table, caption, tbody,
-tfoot, thead, tr, th, td, article, aside,
-canvas, details, embed, figure, figcaption,
-footer, header, hgroup, menu, nav, output, ruby,
-section, summary, time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;}
+
+    html, body, div, span, applet, object, iframe,
+    h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code,
+    del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i,
+    center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot,
+    thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header,
+    hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+    }
+
+    article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+        display: block;
+    }
+
+    body {
+        line-height: 1;
+        background: #000000;
+        height: 100%;
+        min-width: 320px;
+    }
+
+    ol, ul {
+        list-style: none;
+    }
+
+    blockquote, q {
+        quotes: none;
+    }
+    blockquote:before, blockquote:after, q:before, q:after {
+        content: none;
+    }
+
+    table {
+        border-collapse: collapse;
+        border-spacing: 0;
+    }
+
+    input, select, textarea {
+        appearance: none;
+        border: none;
+    }
+    
 
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
@@ -2256,7 +2286,7 @@ input, select, textarea {
 }
 
 .expansion-item {
-    width: calc(33.33% - 20px); /* Adjust the width as needed */
+    /* width: calc(105% - 20px); Adjust the width as needed */
     margin: 10px;
     text-align: center;
 }
@@ -2265,6 +2295,28 @@ input, select, textarea {
     width: 100%;
     height: auto;
     aspect-ratio: 407 / 206;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.cards-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.cards-item {
+    /* width: calc(105% - 20px); Adjust the width as needed */
+    margin: 10px;
+    text-align: center;
+	border-color: #BFD7FF;
+	border: 1px solid rgba(191,215,255,1);
+}
+
+.cards-item img {
+    width: 80%;
+    height: auto;
+    /* aspect-ratio: 407 / 206; */
     object-fit: cover;
     border-radius: 10px;
 }
@@ -2310,3 +2362,503 @@ input, select, textarea {
 			}
 
 		}
+/* Navigation bar search bar styling */
+#header nav input[type="text"] {
+    padding: 8px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    margin-left: 15px;
+    width: 300px; /* Adjust width as needed */
+}
+
+#header nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Navigation Bar Styling */
+#header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 30px; /* Adjust padding as needed */
+    background-color: #4b3f91; /* Adjust the background color if needed */
+}
+
+#header nav ul {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Add spacing between navigation items */
+    list-style: none;
+}
+
+#header nav ul li a {
+    font-size: 1.2em; /* Increase font size */
+    color: #fff; /* Make sure text is visible */
+    text-decoration: none;
+    padding: 10px 20px;
+}
+
+#header nav input[type="text"] {
+    padding: 8px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    margin-left: 15px;
+    width: 300px; /* Adjust width as needed */
+}
+
+#header nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+#header img {
+    height: 30px;
+    width: 30px;
+    margin-left: 20px; /* Adjust icon margins */
+}
+
+/* Restore original navigation bar color */
+#header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 40px; /* Adjust padding for better size */
+    background-color: #392d61; /* Assuming this is the original color you want */
+}
+
+/* Styling for navigation items */
+#header nav ul {
+    display: flex;
+    align-items: center;
+    gap: 40px; /* Adjust spacing between "Home", "Pokemon", and icons */
+    list-style: none;
+}
+
+/* Increase font size and padding */
+#header nav ul li a {
+    font-size: 1.3em; 
+    color: #fff; 
+    text-decoration: none;
+    padding: 10px 15px;
+}
+
+#header nav input[type="text"] {
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    width: 300px;
+    margin-left: auto; /* Align to the right */
+    margin-right: 20px; /* Adjust margin between the search bar and icons */
+}
+
+/* Icon styling */
+#header img {
+    height: 30px;
+    width: 30px;
+    margin-left: 20px; /* Adjust icon margins */
+}
+
+/* Corrected navigation bar color and size adjustments */
+#header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 40px; /* Increased padding for a larger bar */
+    background-color: #6A66A3; /* Set to the specified color */
+}
+
+/* Styling for navigation items */
+#header nav ul {
+    display: flex;
+    align-items: center;
+    gap: 50px; /* Adjust spacing for a wider look */
+    list-style: none;
+}
+
+/* Adjust font size and padding for larger look */
+#header nav ul li a {
+    font-size: 1.4em; 
+    color: #fff; 
+    text-decoration: none;
+    padding: 10px 20px;
+}
+
+/* Correct the search bar positioning and size */
+#header nav input[type="text"] {
+    padding: 12px 18px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    width: 350px;
+    margin-left: auto; /* Align search bar to the right */
+    margin-right: 20px; /* Spacing from the icons */
+}
+
+/* Styling for the icons to fit the larger bar */
+#header img {
+    height: 40px;  /* Adjust icon height for larger bar */
+    width: 40px;
+    margin-left: 20px; /* Keep appropriate spacing */
+}
+
+/* Adjust text styling under cards */
+.card-title {
+    font-size: 1em; /* Reduced size */
+    color: #b2b2b2; /* Slightly softer color for text */
+    text-align: center; /* Ensure text is centered under each card */
+    margin-top: 10px; /* Add some space above the text */
+}
+
+/* Adjust grid layout for cards */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three columns for uniform card size */
+    gap: 30px; /* Adjust gap between cards for better spacing */
+    padding: 20px 40px; /* Add padding around the grid */
+}
+
+.card-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Set card image size for uniformity */
+.card-item img {
+    width: 100%;
+    height: auto;
+    max-width: 350px; /* Set maximum width to ensure uniformity */
+    object-fit: cover; /* Ensure images are cropped properly */
+}
+
+/* Adjust navigation bar alignment */
+#header nav ul {
+    display: flex;
+    align-items: center;
+    gap: 50px; /* Adjust gap for uniform spacing */
+    list-style: none;
+}
+
+#header nav input[type="text"] {
+    padding: 12px 18px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    width: 300px;
+    margin-left: auto; /* Align search bar to the right */
+}
+
+/* Search Bar Adjustments */
+#header nav input[type="text"] {
+    padding: 10px 15px;
+    border: 1px solid #4b3f91;  /* Match render border color */
+    border-radius: 8px;  /* Rounded corners */
+    font-size: 1em;
+    color: #fff;  /* Match text color to white as in the render */
+    background-color: #6A66A3;  /* Background to match the render color */
+    width: 300px;  /* Adjust width to make it proportional */
+    margin-left: auto;  /* Align search bar to the right */
+    margin-right: 20px;  /* Spacing between search bar and icons */
+}
+
+/* Placeholder text color */
+#header nav input[type="text"]::placeholder {
+    color: #e1e1e1;  /* Lighter placeholder text to match render */
+}
+
+/* Card Grid Layout Adjustments */
+.expansion-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    gap: 40px;  /* Increased gap between cards for better spacing */
+    padding: 20px 40px;  /* Add padding around the grid */
+    justify-content: center; /* Ensure the grid is centered */
+}
+
+.expansion-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+/* Ensure card image has consistent size and styling */
+.expansion-item img {
+    width: 100%;
+    height: auto;
+    max-width: 350px;  /* Ensure max width is consistent */
+    object-fit: cover;  /* Ensure images scale properly */
+}
+
+/* Card text styling */
+.expansion-item p.set-title {
+    font-size: 1.1em;  /* Slightly larger than before for clarity */
+    color: #b2b2b2;  /* Match text color from the render */
+    margin-top: 10px;  /* Add spacing above the text */
+}
+
+/* Search Bar Adjustments */
+#header nav input[type="text"] {
+    padding: 10px 15px;
+    border: 1px solid #4b3f91;
+    border-radius: 8px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #6A66A3;
+    width: 350px; /* Increased width for better fit */
+    margin-left: auto;
+    margin-right: 20px; /* Adjust spacing from icons */
+    box-sizing: border-box; /* Ensure padding and width are calculated properly */
+}
+
+/* Placeholder text color */
+#header nav input[type="text"]::placeholder {
+    color: #e1e1e1; /* Lighter placeholder text */
+}
+
+/* Adjusting grid layout */
+.expansion-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Changed to 4 columns for better fit */
+    gap: 40px; /* Even spacing between grid items */
+    justify-content: center; /* Ensure grid is centered */
+    padding: 20px 40px;
+}
+
+.expansion-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ensure card image has consistent size and styling */
+.expansion-item img {
+    width: 100%;
+    height: auto;
+    max-width: 250px;  /* Adjust max width for uniformity */
+    object-fit: cover;
+}
+
+/* Card text styling */
+.expansion-item p.set-title {
+    font-size: 1.1em;
+    color: #b2b2b2;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* Search Bar Adjustments */
+#header nav input[type="text"] {
+    padding: 10px 15px;
+    border: 1px solid #4b3f91;
+    border-radius: 8px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #6A66A3;
+    width: 400px;  /* Increased width for better fit */
+    margin-left: auto;
+    margin-right: 30px; /* Adjust spacing from icons */
+    box-sizing: border-box;
+}
+
+/* Placeholder text color */
+#header nav input[type="text"]::placeholder {
+    color: #e1e1e1;
+}
+
+/* Card Grid Layout Adjustments */
+.expansion-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Back to 3 columns for larger images */
+    gap: 50px;  /* Larger gap for better spacing */
+    justify-content: center;
+    padding: 20px 40px;
+}
+
+.expansion-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ensure card images are larger */
+.expansion-item img {
+    width: 100%;
+    height: auto;
+    max-width: 400px;  /* Increased max width for larger images */
+    object-fit: cover;
+}
+
+/* Card text styling */
+.expansion-item p.set-title {
+    font-size: 1.2em;  /* Slightly larger text for better readability */
+    color: #b2b2b2;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* Card Grid Layout Adjustments */
+.expansion-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns layout for larger images */
+    gap: 30px; /* Reduced gap between items for a tighter fit */
+    justify-content: center;
+    padding: 20px 40px;
+}
+
+.expansion-item img {
+    width: 100%;
+    height: auto;
+    max-width: 450px;  /* Increased max width for larger images */
+    object-fit: cover;
+}
+
+/* Adjust image sizes back to their original larger dimensions */
+.expansion-item img {
+    width: 100%;
+    height: auto;
+    max-width: 600px;  /* Reverting to larger max width for better visual impact */
+    object-fit: cover;
+}
+
+/* Maintain grid layout adjustments with the correct image sizes */
+.expansion-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns for larger images */
+    gap: 30px; /* Adjusted gap for proper spacing */
+    justify-content: center;
+    padding: 20px 40px;
+}
+
+/* Header Container Styling */
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 30px;  /* Adjust padding for spacing */
+    background-color: #6A66A3;
+    height: 1000px;  /* Height adjustment for better fit */
+    box-sizing: border-box;
+}
+
+/* Logo Styling */
+.logo h1 {
+    font-size: 1.8em;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+/* Search Bar Styling */
+.search-bar input[type="text"] {
+    padding: 8px 15px;
+    border: 1px solid #4b3f91;
+    border-radius: 8px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #6A66A3;
+    width: 350px;  /* Adjust width for better fit */
+}
+
+/* Placeholder Text Color */
+.search-bar input[type="text"]::placeholder {
+    color: #e1e1e1;
+}
+
+/* Navigation Links Styling */
+.nav-links ul {
+    display: flex;
+    list-style: none;
+    gap: 30px;  /* Adjust gap for spacing between links */
+}
+
+.nav-links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+/* Account and Notification Icons */
+.account-icons a img {
+    width: 30px;
+    height: 30px;
+    margin-left: 20px;  /* Spacing between icons */
+}
+
+/* Header Container Styling */
+.header-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;  /* Divide into three columns for logo & search bar, navigation, and icons */
+    align-items: center;
+    padding: 10px 30px;
+    background-color: #6A66A3;
+    height: 80px;
+    box-sizing: border-box;
+}
+
+/* Logo and Search Bar in First Third */
+.logo {
+    display: inline-block;
+}
+
+.search-bar {
+    display: inline-block;
+    margin-left: 1px;  /* Small margin between logo and search bar */
+}
+
+.search-bar input[type="text"] {
+    padding: 8px 15px;
+    border: 1px solid #4b3f91;
+    border-radius: 8px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #6A66A3;
+    width: 250px;  /* Adjusted width for better fit */
+}
+
+/* Placeholder Text Color */
+.search-bar input[type="text"]::placeholder {
+    color: #e1e1e1;
+}
+
+/* Center-aligned Navigation Links */
+.nav-links {
+    text-align: center;
+}
+
+.nav-links ul {
+    display: inline-block;
+    list-style: none;
+}
+
+.nav-links ul li {
+    display: inline;
+    margin: 0 20px;  /* Spacing between links */
+}
+
+.nav-links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+/* Account and Notification Icons in Final Third */
+.account-icons {
+    text-align: right;
+}
+
+.account-icons a img {
+    width: 30px;
+    height: 30px;
+    margin-left: 20px;
+}

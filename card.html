@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokémon Card Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="logo">ELEMENTAL ANALYTICS</div>
+    <input type="text" placeholder="Search for cards, sets, tcg">
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">Pokemon</a>
+    </nav>
+    <div class="user-icons">
+      <i class="icon-user"></i>
+      <i class="icon-logout"></i>
+      <i class="icon-notifications"></i>
+    </div>
+  </header>
+
+  <main>
+    <section class="card-info">
+      <div class="card-details">
+        <img src="squirtle-card.png" alt="Squirtle Card">
+        <div class="card-text">
+          <h1>Squirtle</h1>
+          <p>Pokemon - SV: Scarlet & Violet 151</p>
+          <p>Art Rare - 170/165</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="price-history">
+      <h2>Price History</h2>
+      <div class="chart">
+        <!-- Placeholder for chart -->
+      </div>
+    </section>
+
+    <section class="previous-sales">
+      <h2>Previous Sales</h2>
+      <div class="sales-list">
+        <div class="sale-item">
+          <img src="squirtle-card-small.png" alt="Squirtle Small">
+          <span>2024-08-12</span>
+          <span>$17.65</span>
+          <span>eBay</span>
+        </div>
+        <!-- Repeat similar items -->
+      </div>
+    </section>
+
+    <section class="listings">
+      <h2>Listings: 18 Results</h2>
+      <aside class="filter">
+        <h3>Filter</h3>
+        <label><input type="checkbox"> Near Mint Holofoil</label>
+        <!-- More filters -->
+      </aside>
+      <div class="results">
+        <div class="listing-card">
+          <img src="squirtle-card.png" alt="Lightly Played Holofoil">
+          <div class="details">
+            <h3>Lightly Played Holofoil</h3>
+            <p>$17.65 + $13 Shipping</p>
+            <p>Free Shipping Over $150</p>
+            <button>View Deal</button>
+          </div>
+        </div>
+        <!-- More listing cards -->
+      </div>
+    </section>
+  </main>
+</body>
+</html>

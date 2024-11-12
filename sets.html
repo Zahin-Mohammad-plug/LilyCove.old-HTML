@@ -1,96 +1,90 @@
+
 <!DOCTYPE HTML>
-
 <html>
-	<head>
-		<title>Lillycove - Sets </title>
-		<link href="https://fonts.googleapis.com/css?family=Oxanium&display=swap" rel="stylesheet"/>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+<head>
+    <title>Pokemon Set Catalog</title>
+    <link href="https://fonts.googleapis.com/css?family=Oxanium&display=swap" rel="stylesheet"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
 
 
-	</head>
-	<body class="is-preload">
+    <!-- Header Redesign -->
+    <header id="header">
+		<h1>Lilly Cove</h1>
+		<nav>
+		  <ul>
+			<li><a href="index.html">Home</a></li>
+			<li><a href="sets.html">Pokemon</a></li>
+			<li>
+			  <a href="#"
+				><img
+				  src="./images/thumbs/material-symbols_login.png"
+				  alt="Logout"
+				  style="width: 30px; height: 30px"
+			  /></a>
+			</li>
+			<li>
+			  <a href="#"
+				><img
+				  src="./images/thumbs/Vector.png"
+				  alt="Logout"
+				  style="width: 30px; height: 30px"
+			  /></a>
+			</li>
+		  </ul>
+		  <input type="text" placeholder="Search for Cards, sets, tags..." />
+		</nav>
+	  </header>
 
-		<!-- Header -->
-			<header id="header">
-				<h1>Lilly Cove</h1>
-				<nav>
-					<ul>
-						<li><a href="index.html">Home</a></li>
-						<li><a href="sets.html">Pokemon</a></li>
-						<!-- <li><a href="#" class="icon brands usr"><span class="label"></span></a></li> -->
-						<li><a href="#"><img src="./images/thumbs/material-symbols_login.png" alt="Logout" style="width:30px;height:30px;"></a></li>
-						<li><a href="#contact"><img src="./images/thumbs/Vector.png" alt="Logout" style="width:30px;height:30px;"></a></li>
-					</ul>
-					<input type="text" placeholder="Search for Cards, sets, tags...">
-				</nav>
-			</header>
+    <!-- Main Content -->
+    <section id="content">
+        <h2>Pokémon Expansion Sets</h2>
+        <div class="language-options">
+            <a href="#english">English</a>
+            <a href="#japanese">Japanese</a>
+        </div>
 
-		<!-- Intro -->
-			<!-- <section id="intro" class="main style1 dark fullscreen"> -->
-				<div class="content">
-					<aside>
-						<h2>Pokémon Expansion Sets</h2>
-					</aside>
+        <!-- Expansion Set Grid (Hardcoded Data Restored) -->
+        <div class="expansion-grid">
+			            <!-- Each image will now link to cards.html -->
+						<a href="cards.html" class="expansion-item">
+				<img src="./images/sets/v18_299.png" alt="Sword & Shield—Fabled">
+				<p>Sword & Shield—Fabled</p>
+						</a>
+			<a href="cards.html" class="expansion-item">
+				<img src="./images/sets/v18_300.png" alt="Sword & Shield—Masquerade">
+				<p>Sword & Shield—Masquerade</p>
+			</a>
+			<a href="cards.html" class="expansion-item">
+				<img src="./images/sets/v18_301.png" alt="Sword & Shield—Temporal Forces">
+				<p>Sword & Shield—Temporal Forces</p>
+			</a>
+			<a href="cards.html" class="expansion-item">
+				<img src="./images/sets/v18_302.png" alt="Paradox Rift">
+				<p>Paradox Rift</p>
+			</a>
+			<a href="cards.html" class="expansion-item">
+				<img src="./images/sets/v18_305.png" alt="Sword & Shield—Fates">
+				<p>Sword & Shield—Fates</p>
+			</a>
+			<a href="cards.html" class="expansion-item">
+				<img src="./images/sets/v18_304.png" alt="151°">
+				<p>151</p>
+			</a>
+			<a href="cards.html" class="expansion-item">
+				<img src="./images/sets/v18_307.png" alt="Paldean Evolved">
+				<p>Paldean Evolved</p>
+			</a>
+			<a href="cards.html" class="expansion-item">
+				<img src="./images/sets/v18_306.png" alt="Obsidian Flames">
+				<p>Obsidian Flames</p>
+			</a>
+        </div>
+    </section>
 
-				</div>
-
-				<div class="language-options">
-					<a href="#english">English</a>
-					<a href="#japanese">Japanese</a>
-				</div>
-				<div class="expansion-grid">
-					<div class="expansion-item">
-						<img src="./images/sets/v18_299.png" alt="Sword & Shield—Fabled">
-						<p>Sword & Shield—Fabled</p>
-					</div>
-					<div class="expansion-item">
-						<img src="./images/sets/v18_300.png" alt="Sword & Shield—Masquerade">
-						<p>Sword & Shield—Masquerade</p>
-					</div>
-					<div class="expansion-item">
-						<img src="./images/sets/v18_301.png" alt="Sword & Shield—Temporal Forces">
-						<p>Sword & Shield—Temporal Forces</p>
-					</div>
-					<div class="expansion-item">
-						<img src="./images/sets/v18_302.png" alt="Paradox Rift">
-						<p>Paradox Rift</p>
-					</div>
-					<div class="expansion-item">
-						<img src="./images/sets/v18_305.png" alt="Sword & Shield—Fates">
-						<p>Sword & Shield—Fates</p>
-					</div>
-					<div class="expansion-item">
-						<img src="./images/sets/v18_304.png" alt="151°">
-						<p>151</p>
-					</div>
-					<div class="expansion-item">
-						<img src="./images/sets/v18_307.png" alt="Paldean Evolved">
-						<p>Paldean Evolved</p>
-					</div>
-					<div class="expansion-item">
-						<img src="./images/sets/v18_306.png" alt="Obsidian Flames">
-						<p>Obsidian Flames</p>
-					</div>
-				</div>
-				</main>
-			<!-- </section> -->
-
-					</div>
-				</div>
-			</section>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.poptrox.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
-	</body>
+    <script src="assets/js/main.js"></script>
+</body>
 </html>
