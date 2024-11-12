@@ -4,46 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coming Soon - LilyCove</title>
+    <link rel="stylesheet" href="assets\css\styles.css">
     <style>
         body {
-            display: flex;
+            display: cover;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            color: #333;
+            font-family: 'Oxanium', sans-serif;
+            color: #f5f5f5;
             text-align: center;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('NatureLand.webp') no-repeat center center/cover;
         }
         .container {
-            max-width: 600px;
-            padding: 20px;
+            max-width: 800px;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); /* Enhanced shadow for readability */
         }
         h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8); /* Text shadow for clarity */
         }
         p {
-            font-size: 1.2em;
-            margin-bottom: 20px;
+            font-size: 1.3em;
+            margin-bottom: 25px;
+            color: #ffffff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); /* Softer shadow */
+            background: rgba(255, 255, 255, 0.05); /* Reduced opacity */
+            <!-- backdrop-filter: blur(1px); -->
+            padding: 4px 4px;
+            border-radius: 8px;
+            display: block; /* Ensures the text stays separate from the link */
+            margin-top: 10px; /* Adds some spacing */
         }
         a.hidden-link {
-            font-size: 0.8em;
+            font-size: 0.9em;
             text-decoration: none;
-            color: #6A66A3;
-            opacity: 0.5; /* Subtle and less obvious */
+            color: #ff8a00;
+            opacity: 0.5;
+            transition: all 0.3s ease;
         }
         a.hidden-link:hover {
             opacity: 1;
+            background-color: #000; /* Black box on hover */
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
         }
     </style>
+    <script>
+        window.onload = function() {
+            const images = ['NatureLand.webp', 'TradeLand.webp', 'BlossomLand.webp'];
+            const chosenImage = images[Math.floor(Math.random() * images.length)];
+            document.querySelector('.hero-image').src = chosenImage;
+        };
+    </script>
 </head>
 <body>
-    <div class="container">
-        <h1>LilyCove is Coming Soon!</h1>
-        <p>Our website is under construction. Stay tuned for more updates!</p>
-        <a href="index.html?bypass=true" class="hidden-link">Preview the Website</a>
-    </div>
+    <section class="hero">
+        <img src="" alt="Landing Page Hero" class="hero-image">
+        <div class="hero-text">
+          <h1>Lily Cove is Coming Soon!</h1>
+          <p>Our website is under construction. Stay tuned for more updates!</p>
+          <a href="index.html?bypass=true" class="hidden-link">Preview the Website</a>
+        </div>
 </body>
 </html>
