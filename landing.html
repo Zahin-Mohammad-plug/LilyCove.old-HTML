@@ -38,7 +38,7 @@
             color: #ffffff;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4); /* Softer shadow */
             background: rgba(255, 255, 255, 0.05); /* Reduced opacity */
-            <!-- backdrop-filter: blur(1px); -->
+          
             padding: 4px 4px;
             border-radius: 8px;
             display: block; /* Ensures the text stays separate from the link */
@@ -58,6 +58,24 @@
             padding: 5px 10px;
             border-radius: 5px;
         }
+        .contact-info {
+            font-size: 0.9em;
+            color: #e9e9e9; /* A light gray color for subtlety */
+            text-align: center;
+            position: fixed;
+            bottom: 10px;
+            width: 100%;
+            margin: 0;
+        }
+        .contact-email {
+            color: #c9c9c9; /* Same subtle color */
+            text-decoration: none;
+        }
+        
+        .contact-email:hover {
+            text-decoration: underline;
+            color: #ff8a00; /* Highlight color on hover */
+        }
     </style>
     <script>
         window.onload = function() {
@@ -74,6 +92,10 @@
           <h1>Lily Cove is Coming Soon!</h1>
           <p>Our website is under construction. Stay tuned for more updates!</p>
           <a href="index.html?bypass=true" class="hidden-link">Preview the Website</a>
+
         </div>
+        <p class="contact-info">Reach us at: 
+            <a href="mailto:contact@lilycove.io" class="contact-email">contact@lilycove.io</a>
+        </p>
 </body>
 </html>
