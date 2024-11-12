@@ -1,13 +1,23 @@
+/* General Styles */
 * {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Oxanium', regular;
+    font-family: 'Oxanium', sans-serif;  /* Use Oxanium font */
   }
   
   body {
     background-color: #1c1b23;
     color: #fff;
+  }
+  
+  h1, h2, h3 {
+    color: #fff;
+    font-weight: 700;
+  }
+  
+  a {
+    text-decoration: none;
   }
   
   header {
@@ -19,8 +29,9 @@
   }
   
   .logo {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: bold;
+    color: rgba(221,216,184,1);
   }
   
   input[type="text"] {
@@ -28,26 +39,113 @@
     border-radius: 5px;
     border: none;
     width: 300px;
+    background: #D9D9D91A;
+    color: #fff;
   }
-  
+  input[type="text"]::placeholder {
+    color: #fffcfc;
+  }
+
+
   nav a {
     margin-left: 20px;
-    color: #fff;
-    text-decoration: none;
+    color: rgb(255, 255, 255);
+  }
+
+  nav a:hover {
+    color: #64ffda; /* Icon color on hover */
   }
   
+  /* SVG Icon Styling */
   .user-icons i {
     margin-left: 20px;
+    font-size: 1.6rem;
+    color: #fff;
     cursor: pointer;
   }
+
+  nav a, .user-icons i {
+    transition: color 0.3s ease; /* Smooth transition */
+  }
+
+  .user-icons i:hover {
+    color: #64ffda; /* Icon color on hover */
+  }
+
+
+.hero-text {
+  animation: fadeIn 1.5s ease;
+}
   
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Hero Section */
+.hero {
+  position: relative;
+  height: 100vh; /* Full screen height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1; /* Place image behind the text */
+}
+
+.hero-text {
+  color: #fff;
+  text-align: center;
+  z-index: 1;
+}
+
+.hero-text h1 {
+  font-size: 4rem;
+  margin-bottom: 10px;
+}
+
+.hero-text p {
+  font-size: 1.5rem;
+}
+
+.cta-button {
+  padding: 15px 30px;
+  background-color: #64ffda;
+  color: #000;
+  text-decoration: none;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  margin-top: 20px;
+  display: inline-block;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Adds shadow */
+}
+
+.cta-button:hover {
+  background-color: #52dab6;  
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Increases shadow on hover */
+}
+
+  /* Main Content */
   main {
-    display: flex;
-    flex-direction: column;
     padding: 20px;
   }
   
-  .card-info {
+  /* Card Information Section */
+  .cards-info {
     display: flex;
     background-color: #252533;
     padding: 20px;
@@ -55,27 +153,40 @@
     margin-bottom: 20px;
   }
   
-  .card-details {
+  .cards-details {
     display: flex;
   }
   
-  .card-details img {
+  .cards-details img {
     width: 150px;
     border-radius: 10px;
   }
   
-  .card-text {
+  .cards-text {
     margin-left: 20px;
   }
   
-  .price-history, .previous-sales {
+  .cards-text h1 {
+    font-size: 2rem;
+  }
+  
+  /* Divider Line Styling */
+  .divider {
+    border: none;
+    border-bottom: 1.5px solid #5DA271; /* Creates the line */
+    margin: 10px 0; /* Space above and below the line */
+    width: 100%; /* Full width of the container */
+  }
+
+  /* Price History Section */
+  .price-history, .previous-sales, .listings {
     background-color: #252533;
     padding: 20px;
     border-radius: 10px;
     margin-bottom: 20px;
   }
   
-  h2 {
+  .price-history h2, .previous-sales h2 {
     margin-bottom: 10px;
   }
   
@@ -86,6 +197,7 @@
     border-radius: 10px;
   }
   
+  /* Previous Sales Section */
   .previous-sales .sales-list {
     display: flex;
     flex-direction: column;
@@ -97,6 +209,13 @@
     margin-bottom: 10px;
   }
   
+  .sale-item img {
+    width: 50px;
+    height: auto;
+    border-radius: 5px;
+  }
+  
+  /* Listings Section */
   .listings {
     display: flex;
     justify-content: space-between;
@@ -107,6 +226,16 @@
     background-color: #252533;
     padding: 10px;
     border-radius: 10px;
+  }
+  
+  .filter h3 {
+    margin-bottom: 10px;
+  }
+  
+  .filter label {
+    display: block;
+    margin-bottom: 5px;
+    cursor: pointer;
   }
   
   .results {
@@ -125,10 +254,16 @@
   
   .listing-card img {
     width: 100px;
+    border-radius: 10px;
   }
   
   .details {
     margin-left: 20px;
+  }
+  
+  .details h3 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
   }
   
   button {
@@ -140,3 +275,344 @@
     cursor: pointer;
   }
   
+  /* Expansion Sets Grid */
+  .expansion-header {
+    text-align: left; /* Center-align the content */
+    margin-bottom: 20px; /* Add space between header and grid */
+    
+  }
+  
+  .expansion-header h1 {
+    font-size:2.5rem;
+    font-family: 'Oxanium';
+    font-weight: 500;
+    color: rgba(221,216,184,1);
+
+  }
+  /* Language Options Styling */
+  .language-options {
+    display: inline-block; /* Keeps language options in one line */
+    margin-top: 5px; /* Adds space above language options */
+  }
+
+  .language-options a {
+    margin-right: 20px;
+    color: #5DA271;
+    font-size: 1.2rem;
+  }
+
+  .language-options a:hover {
+    color: #64ffda;
+    text-decoration: bold;
+  }
+  
+  .language-options a.active {
+    border-bottom: 2px solid #5DA271;
+    font-weight: bold;
+  }
+  
+  .expansion-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 25px;
+  }
+
+  .expansion-grid {
+    animation: fadeIn 1.5s ease;
+  }
+    
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  
+  .expansion-item {
+    /* background-color: #252533; */
+    /* padding: 10px; */
+
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border-radius: 10px;
+    overflow: hidden; /* Ensure rounded corners apply to images */
+    transition: box-shadow 0.3s ease;
+  }
+
+  .expansion-item:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+  }
+  
+  .expansion-item img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 407 / 206;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease; /* Adds smooth transition on hover */
+  }
+
+  .expansion-item img:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+  }
+
+  /* Set title text hidden by default */
+  .expansion-item p {
+    display: none; /* Hide the title */
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.8); /* Dark background with transparency */
+    color: #00c295; /* White text */
+    padding: 5px 10px; /* Padding inside the tooltip */
+    border-radius: 5px; /* Rounded corners */
+    white-space: nowrap; /* Prevent text wrapping */
+    z-index: 10; /* Ensure it's above other elements */
+    pointer-events: none; /* Allow mouse events to pass through */
+  }
+
+  /* Show the text box when hovering over the image */
+  .expansion-item:hover p {
+    display: block; /* Show title when hovering */
+  }
+
+  /* Move the tooltip dynamically based on mouse position */
+  .expansion-item {
+    position: relative; /* Relative positioning to position the title dynamically */
+  }
+
+  
+  /* Catalog Page (for card grid) */
+  .catalog-header {
+    justify-content: space-between;
+    align-items: left;
+    padding: auto;
+    margin-bottom: 20px;
+  }
+  
+  .catalog-header h1 {
+      /* width: 361px; */
+      color: rgba(221,216,184,1);
+      font-family: 'Oxanium';
+      font-weight: 500;
+      font-size: 48px;
+      opacity: 1;
+      text-align: left;
+    
+  }
+  
+  .sort-options {
+    display: flex;
+    align-items: center;
+  }
+  
+  .sort-options select {
+    padding: 5px;
+    margin-left: 10px;
+  }
+  
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
+
+  .cards-grid{
+    animation: fadeIn 1.5s ease;
+  }
+    
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  
+  .cards-item {
+    background-color: #252533;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+  }
+  
+  .cards-item img {
+    width: 100%;
+    border-radius: 10px;
+  }
+  
+  .cards-item h3 {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    font-weight: 300;
+  }
+  
+  .cards-item p {
+    margin-top: 5px;
+    color: #a0a0a0;
+  }
+
+  @media (max-width: 768px) {
+    .cards-grid {
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Adjusts grid */
+    }
+  
+    .cards-item img {
+      width: 100px; /* Adjusts card image size for smaller screens */
+    }
+  }
+  
+  
+  /* Search Bar for Catalog */
+  .search-sort {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #252533;
+    border-radius: 5px;
+    padding: 5px;
+  }
+  
+  .search-bar input[type="text"] {
+    background-color: #1c1b23;
+    border: none;
+    color: #fff;
+    padding: 8px;
+    border-radius: 5px;
+    outline: none;
+    width: 200px;
+  }
+  
+  .search-bar button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    color: #fff;
+  }
+  
+  .search-bar button .icon-search {
+    font-size: 1.2rem;
+  }
+  
+
+  /* Individual Card Page Specifics */
+
+/* Card Details Section */
+.card-info {
+  display: flex;
+  background-color: #252533;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.card-details img {
+  width: 250px; /* Larger Image for Individual Card Page */
+  border-radius: 10px;
+}
+
+.card-text {
+  margin-left: 20px;
+}
+
+.card-text h1 {
+  font-size: 2.5rem; /* Larger Title for Individual Page */
+}
+
+.card-text p {
+  margin-top: 10px;
+  line-height: 1.5;
+}
+
+/* Price History Section */
+.price-history {
+  background-color: #252533;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.price-history h2 {
+  margin-bottom: 10px;
+}
+
+.chart {
+  width: 100%;
+  height: 250px;
+  background-color: #333;
+  border-radius: 10px;
+}
+
+.history-controls {
+  margin-top: 10px;
+}
+
+.history-controls button {
+  padding: 5px 10px;
+  margin-right: 10px;
+  background-color: #7161a8;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Listings Section */
+.listings .listing-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background-color: #252533;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.listings .listing-card img {
+  width: 100px;
+  border-radius: 10px;
+}
+
+.listings .details h3 {
+  font-size: 1.5rem;
+}
+
+/* Related Cards Section */
+.related-info {
+  background-color: #252533;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.related-info h2 {
+  margin-bottom: 10px;
+}
+
+.related-cards {
+  display: flex;
+}
+
+.related-card {
+  margin-right: 20px;
+  text-align: center;
+}
+
+.related-card img {
+  width: 150px;
+  border-radius: 10px;
+}
+
+.related-card h3 {
+  margin-top: 10px;
+  font-size: 1.2rem;
+}

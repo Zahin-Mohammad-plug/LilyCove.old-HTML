@@ -1,90 +1,92 @@
-
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Pokemon Set Catalog</title>
-    <link href="https://fonts.googleapis.com/css?family=Oxanium&display=swap" rel="stylesheet"/>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="assets/css/main.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokemon Expansion Sets</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+  <header>
+    <div class="logo">Lilly Cove</div>
+    <input type="text" placeholder="Search for cards, sets, tcg">
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="sets.html">Pokemon</a>
+    </nav>
+    <div class="user-icons">
+      <i class="fas fa-user"></i> <!-- User Icon -->
+      <i class="fas fa-sign-out-alt"></i> <!-- Logout Icon -->
+      <i class="fas fa-bell"></i> <!-- Notifications Icon -->
+    </div>
+  </header>
 
 
-    <!-- Header Redesign -->
-    <header id="header">
-		<h1>Lilly Cove</h1>
-		<nav>
-		  <ul>
-			<li><a href="index.html">Home</a></li>
-			<li><a href="sets.html">Pokemon</a></li>
-			<li>
-			  <a href="#"
-				><img
-				  src="./images/thumbs/material-symbols_login.png"
-				  alt="Logout"
-				  style="width: 30px; height: 30px"
-			  /></a>
-			</li>
-			<li>
-			  <a href="#"
-				><img
-				  src="./images/thumbs/Vector.png"
-				  alt="Logout"
-				  style="width: 30px; height: 30px"
-			  /></a>
-			</li>
-		  </ul>
-		  <input type="text" placeholder="Search for Cards, sets, tags..." />
-		</nav>
-	  </header>
+  <main>
+    <section class="expansion-header">
+      <h1>Pokemon Expansion Sets</h1>
+      <div class="language-options">
+        <a href="#" class="active">English</a>
+        <a href="#">Japanese</a>
+      </div>
+	  <hr class="divider"> <!-- Divider line below the language options -->
+    </section>
 
-    <!-- Main Content -->
-    <section id="content">
-        <h2>Pokémon Expansion Sets</h2>
-        <div class="language-options">
-            <a href="#english">English</a>
-            <a href="#japanese">Japanese</a>
-        </div>
-
-        <!-- Expansion Set Grid (Hardcoded Data Restored) -->
-        <div class="expansion-grid">
-			            <!-- Each image will now link to cards.html -->
-						<a href="cards.html" class="expansion-item">
-				<img src="./images/sets/v18_299.png" alt="Sword & Shield—Fabled">
+    <section class="expansion-grid">
+      <a href="cards.html" class="expansion-item">
+				<img src="./images/sets/shrouded.png" alt="Sword & Shield—Fabled">
 				<p>Sword & Shield—Fabled</p>
 						</a>
 			<a href="cards.html" class="expansion-item">
-				<img src="./images/sets/v18_300.png" alt="Sword & Shield—Masquerade">
+				<img src="./images/sets/twilight.png" alt="Sword & Shield—Masquerade">
 				<p>Sword & Shield—Masquerade</p>
 			</a>
 			<a href="cards.html" class="expansion-item">
-				<img src="./images/sets/v18_301.png" alt="Sword & Shield—Temporal Forces">
+				<img src="./images/sets/temporal.png" alt="Sword & Shield—Temporal Forces">
 				<p>Sword & Shield—Temporal Forces</p>
 			</a>
 			<a href="cards.html" class="expansion-item">
-				<img src="./images/sets/v18_302.png" alt="Paradox Rift">
+				<img src="./images/sets/pararift.png" alt="Paradox Rift">
 				<p>Paradox Rift</p>
 			</a>
 			<a href="cards.html" class="expansion-item">
-				<img src="./images/sets/v18_305.png" alt="Sword & Shield—Fates">
+				<img src="./images/sets/ssfates.png" alt="Sword & Shield—Fates">
 				<p>Sword & Shield—Fates</p>
 			</a>
 			<a href="cards.html" class="expansion-item">
-				<img src="./images/sets/v18_304.png" alt="151°">
+				<img src="./images/sets/151.png" alt="151°">
 				<p>151</p>
 			</a>
 			<a href="cards.html" class="expansion-item">
-				<img src="./images/sets/v18_307.png" alt="Paldean Evolved">
+				<img src="./images/sets/paldeanE.png" alt="Paldean Evolved">
 				<p>Paldean Evolved</p>
 			</a>
 			<a href="cards.html" class="expansion-item">
-				<img src="./images/sets/v18_306.png" alt="Obsidian Flames">
+				<img src="./images/sets/obsidian.png" alt="Obsidian Flames">
 				<p>Obsidian Flames</p>
 			</a>
-        </div>
     </section>
-
-    <script src="assets/js/main.js"></script>
+  </main>
+  <script>
+	const expansionItems = document.querySelectorAll('.expansion-item');
+  
+	expansionItems.forEach(item => {
+	  item.addEventListener('mousemove', (e) => {
+		const tooltip = item.querySelector('p');
+		const x = e.clientX - item.getBoundingClientRect().left + 10; // Offset to the right
+		const y = e.clientY - item.getBoundingClientRect().top + 10;  // Offset to the bottom
+		tooltip.style.left = `${x}px`;
+		tooltip.style.top = `${y}px`;
+	  });
+  
+	  item.addEventListener('mouseleave', () => {
+		const tooltip = item.querySelector('p');
+		tooltip.style.left = `0`;  // Reset position when not hovering
+		tooltip.style.top = `0`;
+	  });
+	});
+  </script>
 </body>
 </html>

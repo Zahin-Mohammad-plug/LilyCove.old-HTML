@@ -1,83 +1,82 @@
-
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Elemental Analytics - Paradox Rift</title>
-    <link href="https://fonts.googleapis.com/css?family=Oxanium&display=swap" rel="stylesheet"/>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="assets/css/main.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokemon Card Catalog</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+  <header>
+    <div class="logo">Lilly Cove</div>
+    <input type="text" placeholder="Search for cards, sets, tcg">
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="sets.html">Pokemon</a>
+    </nav>
+    <div class="user-icons">
+      <i class="fas fa-user"></i> <!-- User Icon -->
+      <i class="fas fa-sign-out-alt"></i> <!-- Logout Icon -->
+      <i class="fas fa-bell"></i> <!-- Notifications Icon -->
+    </div>
+  </header>
 
-    <header id="header">
-        <h1>Lilly Cove</h1>
-        <nav>
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="sets.html">Pokemon</a></li>
-            <li>
-              <a href="#"
-                ><img
-                  src="./images/thumbs/material-symbols_login.png"
-                  alt="Logout"
-                  style="width: 30px; height: 30px"
-              /></a>
-            </li>
-            <li>
-              <a href="#"
-                ><img
-                  src="./images/thumbs/Vector.png"
-                  alt="Logout"
-                  style="width: 30px; height: 30px"
-              /></a>
-            </li>
-          </ul>
-          <input type="text" placeholder="Search for Cards, sets, tags..." />
-        </nav>
-      </header>
 
-    <!-- Main Content Section for Cards -->
-    <section id="content" style="margin-top: 40px;">
-        <h2>SV: Paradox Rift</h2>
-        <p>177 Cards Total</p>
-        <div class="sort-options">
-            <label for="sort">Sort By:</label>
-            <select id="sort">
-                <option value="rarity">Rarity (Rarest First)</option>
-            </select>
-        </div>
-
-        <!-- Card Grid -->
-        <div class="cards-grid">
-            <div class="cards-item">
-                <img src="./images/cards/yveltal.png" alt="Yveltal">
-                <p class="set-title">Yveltal<br>Illustration Rare<br>$14.34</p>
-            </div>
-            <div class="cards-item">
-                <img src="./images/cards/groudon.png" alt="Groudon">
-                <p class="set-title">Groudon<br>Illustration Rare<br>$18.69</p>
-            </div>
-            <div class="cards-item">
-                <img src="./images/cards/mienshao.png" alt="Mienshao">
-                <p class="set-title">Mienshao<br>Illustration Rare<br>$4.99</p>
-            </div>
-            <div class="cards-item">
-                <img src="./images/cards/garchomp.png" alt="Garchomp">
-                <p class="set-title">Garchomp<br>Illustration Rare<br>$84.66</p>
-            </div>
-            <div class="cards-item">
-                <img src="./images/cards/iron_hands.png" alt="Iron Hands">
-                <p class="set-title">Iron Hands<br>Illustration Rare<br>$36.78</p>
-            </div>
-            <div class="cards-item">
-                <img src="./images/cards/iron_jugulis.png" alt="Iron Jugulis">
-                <p class="set-title">Iron Jugulis<br>Illustration Rare<br>$52.08</p>
-            </div>
-            <!-- Add more cards in the same format as above -->
-        </div>
+  <main>
+    <section class="catalog-header">
+      <h1>SV: Paradox Rift</h1>
+      <span>177 Cards Total</span>
+      <div class="sort-options">
+        <label for="sort">Sort By:</label>
+        <select id="sort">
+          <option value="rarity">Rarity (Rarest First)</option>
+        </select>
+      </div>
+      <hr class="divider"> <!-- Divider line below the language options -->
     </section>
 
-    <script src="assets/js/main.js"></script>
+    <section class="cards-grid">
+      <div class="cards-item">
+        <img src="./images/cards/yveltal.png" alt="Yveltal">
+        <h3>Yveltal</h3>
+        <p>Illustration Rare</p>
+        <p>$14.34</p>
+      </div>
+      <div class="cards-item">
+        <img src="./images/cards/groudon.png" alt="Groudon">
+        <h3>Groudon</h3>
+        <p>Illustration Rare</p>
+        <p>$18.69</p>
+      </div>
+        <div class="cards-item">
+            <img src="./images/cards/yveltal.png" alt="Yveltal">
+            <p class="set-title">Yveltal<br>Illustration Rare<br>$14.34</p>
+        </div>
+        <div class="cards-item">
+            <img src="./images/cards/groudon.png" alt="Groudon">
+            <p class="set-title">Groudon<br>Illustration Rare<br>$18.69</p>
+        </div>
+        <div class="cards-item">
+            <img src="./images/cards/mienshao.png" alt="Mienshao">
+            <p class="set-title">Mienshao<br>Illustration Rare<br>$4.99</p>
+        </div>
+        <div class="cards-item">
+            <img src="./images/cards/garchomp.png" alt="Garchomp">
+            <p class="set-title">Garchomp<br>Illustration Rare<br>$84.66</p>
+        </div>
+        <div class="cards-item">
+            <img src="./images/cards/iron_hands.png" alt="Iron Hands">
+            <p class="set-title">Iron Hands<br>Illustration Rare<br>$36.78</p>
+        </div>
+        <div class="cards-item">
+            <img src="./images/cards/iron_jugulis.png" alt="Iron Jugulis">
+            <p class="set-title">Iron Jugulis<br>Illustration Rare<br>$52.08</p>
+        </div>
+        <!-- Add more cards in the same format as above -->
+      <!-- Repeat similar cards -->
+    </section>
+  </main>
 </body>
 </html>
