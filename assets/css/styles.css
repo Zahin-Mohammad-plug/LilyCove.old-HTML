@@ -831,6 +831,7 @@
 /* Related Cards Section */
 .related-info {
   background-color: #252533;
+  margin-top: 40px;
   padding: 20px;
   border-radius: 10px;
 }
