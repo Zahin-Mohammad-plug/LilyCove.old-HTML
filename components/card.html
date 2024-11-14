@@ -95,32 +95,67 @@
       <hr class="divider" />
       
       <!-- Listings Section -->
-      <section class="listings">
+      <section class="card-listings">
         <h2>Listings: 18 Results</h2>
-        <aside class="filter">
-          <h3>Filter</h3>
-          <label><input type="checkbox" /> Near Mint Holofoil</label>
-          <label><input type="checkbox" /> Lightly Played Holofoil</label>
-          <label><input type="checkbox" /> Moderately Played Holofoil</label>
-        </aside>
-
-        <div class="results">
-          <div class="listing-card">
-            <img src="/assets/images/listings/danireon-squirtle.png" alt="Lightly Played Holofoil" />
-            <div class="details">
-              <h3>Lightly Played Holofoil</h3>
-              <p>$17.65 + $13 Shipping</p>
-              <p>Free Shipping Over $150</p>
-              <button>View Deal</button>
+        <div class="card-listings-container">
+          <!-- Filter Section -->
+          <aside class="card-filter">
+            <h3>Filter</h3>
+            <div class="card-filter-category">
+              <h4>Condition</h4>
+              <label><input type="checkbox" /> Near Mint Holofoil</label>
+              <label><input type="checkbox" /> Lightly Played Holofoil</label>
+              <label><input type="checkbox" /> Moderately Played Holofoil</label>
             </div>
-          </div>
-          <div class="listing-card">
-            <img src="/assets/images/listings/ebay-squirtle.png" alt="Near Mint" />
-            <div class="details">
-              <h3>Near Mint</h3>
-              <p>$82.43 + $11.98 Shipping</p>
-              <button>View Deal</button>
+            <div class="card-filter-category">
+              <h4>Seller Location</h4>
+              <label><input type="checkbox" /> Ottawa, ON</label>
+              <label><input type="checkbox" /> Toronto, ON</label>
+              <label><input type="checkbox" /> Hamilton, ON</label>
             </div>
+            <div class="card-filter-category">
+              <h4>Price</h4>
+              <div class="card-price-range">
+                <input type="text" placeholder="$0" />
+                <input type="text" placeholder="$300+" />
+              </div>
+            </div>
+            <div class="card-filter-category">
+              <h4>Sort</h4>
+              <label><input type="radio" name="sort" /> Price: Low to High</label>
+              <label><input type="radio" name="sort" /> Price: High to Low</label>
+              <label><input type="radio" name="sort" /> eBay First</label>
+            </div>
+          </aside>
+      
+          <!-- Results Section -->
+          <div class="card-results">
+            <div class="card-listing-card">
+              <img src="/assets/images/listings/danireon-squirtle.png" alt="Lightly Played Holofoil" />
+              <div class="card-details">
+                <h3>Lightly Played Holofoil</h3>
+                <p>$17.65 + $13 shipping</p>
+                <p>Free Shipping Over $150</p>
+                <button class="card-button">View Deal</button>
+              </div>
+              <div class="card-seller-info">
+                <img src="\assets\images\merchant-icons\danireon-logo.png" alt="Danireon" />
+                <p>Ottawa, ON</p>
+              </div>
+            </div>
+            <div class="card-listing-card">
+              <img src="/assets/images/listings/ebay-squirtle.png" alt="Near Mint" />
+              <div class="card-details">
+                <h3>Near Mint</h3>
+                <p>$82.43 + $11.98 shipping</p>
+                <button class="card-button">View Deal</button>
+              </div>
+              <div class="card-seller-info">
+                <img src="\assets\images\merchant-icons\ebay-logo.png" alt="eBay" />
+                <p>Hamilton, ON</p>
+              </div>
+            </div>
+            
           </div>
         </div>
       </section>
@@ -141,4 +176,21 @@
       </section>
     </main>
   </body>
+  <script>
+    document.querySelectorAll('.filter input').forEach(checkbox => {
+      checkbox.addEventListener('change', function() {
+        const filters = Array.from(document.querySelectorAll('.filter input:checked')).map(cb => cb.parentNode.textContent.trim());
+        const listings = document.querySelectorAll('.listing-card');
+    
+        listings.forEach(listing => {
+          const text = listing.querySelector('h3').textContent;
+          if (filters.length === 0 || filters.some(filter => text.includes(filter))) {
+            listing.style.display = 'flex';
+          } else {
+            listing.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
 </html>

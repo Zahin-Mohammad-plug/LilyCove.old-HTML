@@ -220,8 +220,9 @@
   .listings {
     display: flex;
     justify-content: space-between;
+    margin-top: 20px;
   }
-  
+
   .filter {
     width: 20%;
     background-color: #252533;
@@ -241,25 +242,27 @@
   
   .results {
     width: 75%;
+    display: flex;
+    flex-direction: column;
   }
   
   .listing-card {
-    background-color: #252533;
-    padding: 20px;
-    margin-bottom: 20px;
-    border-radius: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: #252533;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
   }
   
   .listing-card img {
-    width: 100px;
-    border-radius: 10px;
+    width: 80px;
+    border-radius: 5px;
   }
   
   .details {
-    margin-left: 20px;
+    margin-left: 15px;
   }
   
   .details h3 {
@@ -268,11 +271,11 @@
   }
   
   button {
-    padding: 10px 20px;
     background-color: #34a853;
     color: #fff;
     border: none;
     border-radius: 5px;
+    padding: 8px 15px;
     cursor: pointer;
   }
   
@@ -640,6 +643,7 @@
   padding: 20px;
   border-radius: 10px;
   flex: 1; /* Make each section take equal space */
+  margin-right: 20px;
 }
 
 .price-history {
@@ -671,6 +675,10 @@
   flex: 1; /* Make each section take equal space */
 }
 
+.card-previous-sales {
+  margin-right: 0; /* Reset margin to avoid extra spacing */
+}
+
 .price-history {
   margin-right: 20px; /* Add space between price history and previous sales */
 }
@@ -692,23 +700,134 @@
   cursor: pointer;
 }
 
-/* Card Previous Sales Section */
-.card-previous-sales .sales-list {
+/* Listings Section */
+.card-listings {
+  margin-top: 20px;
+}
+
+.card-listings h2 {
+  margin-bottom: 20px;
+}
+
+.card-listings-container {
+  display: flex;
+  gap: 20px;
+}
+
+.card-filter {
+  width: 20%;
+  background-color: #252533;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.card-filter h3 {
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+}
+
+.card-filter-category {
+  margin-bottom: 20px;
+}
+
+.card-filter-category h4 {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: #BFD7FF;
+}
+
+.card-filter label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+}
+
+.card-price-range input {
+  width: calc(50% - 10px);
+  background-color: #1c1b23;
+  border: 1px solid #5DA271;
+  color: #fff;
+  padding: 5px;
+  border-radius: 5px;
+  margin-right: 10px;
+  font-size: 0.9rem;
+}
+
+/* Results Section */
+.card-results {
+  flex: 1;
   display: flex;
   flex-direction: column;
+  gap: 15px;
 }
 
-.sale-item {
+.card-listing-card {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
+  align-items: center;
+  background-color: #252533;
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #5DA271;
+  transition: box-shadow 0.3s ease;
 }
 
-.sale-item img {
-  width: 50px;
-  height: auto;
+.card-listing-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.card-listing-card img {
+  width: 80px;
   border-radius: 5px;
 }
+
+.card-details {
+  flex: 2;
+  margin-left: 20px;
+}
+
+.card-details h3 {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  color: #BFD7FF;
+}
+
+.card-details p {
+  font-size: 0.9rem;
+  color: #a0a0a0;
+  margin-bottom: 5px;
+}
+
+.card-button {
+  background-color: #34a853;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.card-button:hover {
+  background-color: #2d8f45;
+}
+
+.card-seller-info {
+  text-align: center;
+  flex: 1;
+}
+
+.card-seller-info img {
+  width: 50px;
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.card-seller-info p {
+  font-size: 0.8rem;
+  color: #DDD8B8;
+}
+
 /* Related Cards Section */
 .related-info {
   background-color: #252533;
