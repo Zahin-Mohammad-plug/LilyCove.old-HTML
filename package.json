@@ -1,0 +1,22 @@
+{
+  "name": "lilycove",
+  "version": "1.0.0",
+  "description": "This project is a web-based application designed to track prices and provide listings for buying and selling Pokémon cards. The goal is to create a comprehensive and user-friendly platform for collectors and sellers to monitor card values and availability.",
+  "main": "index.js",
+  "scripts": {
+    "fetch": "node backend/fetchData.js",
+    "uploadToCloudinary": "node backend/upload2Cloudinary.js",    
+    "uploadToFirebase": "node backend/uploadFireBaseData.js",
+    "updateAll": "npm run fetch && npm run uploadToCloudinary && npm run uploadToFirebase"
+  },
+  "keywords": [],
+  "author": "Zahin Mohammad",
+  "type": "module",
+  "license": "ISC",
+  "dependencies": {
+    "cloudinary": "^2.5.1",
+    "dotenv": "^16.4.5",
+    "firebase-admin": "^13.0.0",
+    "node-fetch": "^3.3.2"
+  }
+}

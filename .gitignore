@@ -1,0 +1,5 @@
+# Ignore backend files (for now)
+backend/
+
+.env
+

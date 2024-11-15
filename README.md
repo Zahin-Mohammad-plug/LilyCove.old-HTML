@@ -20,10 +20,18 @@ Feel free to use or modify the code for personal or non-commercial projects.
 
 
 ## Installation
+(In progress)
+1. Clone the repository.
+2. Install dependencies:
+   ```bash
+   npm install
+3. Create a .env file in the root of the project with the following content
+    POKEMON_API_KEY=your-pokemon-tcg-api-key
+    FIREBASE_SERVICE_ACCOUNT_PATH=./path/to/your/service-account.json
+4. Download your service-account.json from the Firebase Console and place it in the specified path.
+5. Run the script
+    node .\backend\index.js
 
-Clone my repo and open index.html
-
-    
 ## Contributing
 
 Contributions are welcome! If you’d like to improve or expand the project, feel free to submit a pull request.
