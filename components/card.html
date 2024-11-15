@@ -96,7 +96,20 @@
       
 <!-- Listings Section -->
 <section class="card-listings">
-  <h2>Listings: <span id="filtered-count">0</span> Results (<span id="total-count">0</span> Total)</h2>
+  <div class="card-listings-header">
+    <h2>Listings: <span id="filtered-count">0</span> Results (<span id="total-count">0</span> Total)</h2>
+    <div class="card-listings-sort">
+      <label for="sort-by">Sort By:</label>
+      <select id="sort-by">
+        <option value="price-asc">Price (Low to High)</option>
+        <option value="price-desc">Price (High to Low)</option>
+        <option value="price-shipping-asc">Price + Shipping (Low to High)</option>
+        <option value="price-shipping-desc">Price + Shipping (High to Low)</option>
+        <option value="condition-asc">Condition (A to Z)</option>
+        <option value="condition-desc">Condition (Z to A)</option>
+      </select>
+    </div>
+  </div>
 
   <div class="card-listings-container">
     <aside class="card-listings-filter">
@@ -184,12 +197,13 @@
   </body>
   <script>
     document.addEventListener('DOMContentLoaded', function() {
-      const listings = document.querySelectorAll('.card-listing-card');
+      const listings = Array.from(document.querySelectorAll('.card-listing-card'));
       const filterConditions = new Set();
       const filterMerchants = new Set();
       const filterLocations = new Set();
       const filteredCountElement = document.getElementById('filtered-count');
       const totalCountElement = document.getElementById('total-count');
+      const sortBySelect = document.getElementById('sort-by');
   
       // Elements for price filtering
       const minPriceInput = document.getElementById('min-price');
@@ -222,44 +236,74 @@
       totalCountElement.textContent = totalListings;
   
       filterCheckboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', filterListings);
+        checkbox.addEventListener('change', filterAndSortListings);
       });
   
       // Price range filtering
       [minPriceInput, maxPriceInput].forEach(input => {
-        input.addEventListener('input', filterListings);
+        input.addEventListener('input', filterAndSortListings);
       });
   
-      function filterListings() {
+      // Sorting logic
+      sortBySelect.addEventListener('change', filterAndSortListings);
+  
+      function filterAndSortListings() {
         const selectedConditions = getSelectedFilters('filter-conditions');
         const selectedMerchants = getSelectedFilters('filter-merchants');
         const selectedLocations = getSelectedFilters('filter-locations');
         const minPrice = parseFloat(minPriceInput.value) || 0;
         const maxPrice = parseFloat(maxPriceInput.value) || Infinity;
+        const sortBy = sortBySelect.value;
   
-        let filteredCount = 0;
-  
-        listings.forEach(listing => {
+        let filteredListings = listings.filter(listing => {
           const condition = listing.getAttribute('data-condition');
           const merchant = listing.getAttribute('data-merchant');
           const location = listing.getAttribute('data-location');
-          const price = parseFloat(listing.querySelector('.card-listings-price').textContent.replace('$', ''));
+          const price = parseFloat(listing.querySelector('.card-price').textContent.replace('$', ''));
+          const shipping = parseFloat(listing.querySelector('.card-shipping').textContent.replace(/[^0-9.]/g, '')) || 0;
   
-          if (
+          return (
             (selectedConditions.length === 0 || selectedConditions.includes(condition)) &&
             (selectedMerchants.length === 0 || selectedMerchants.includes(merchant)) &&
             (selectedLocations.length === 0 || selectedLocations.includes(location)) &&
             price >= minPrice && price <= maxPrice
-          ) {
-            listing.style.display = 'flex';
-            filteredCount++;
-          } else {
-            listing.style.display = 'none';
+          );
+        });
+  
+        // Sort listings based on the selected criteria
+        filteredListings.sort((a, b) => {
+          const priceA = parseFloat(a.querySelector('.card-price').textContent.replace('$', ''));
+          const priceB = parseFloat(b.querySelector('.card-price').textContent.replace('$', ''));
+          const shippingA = parseFloat(a.querySelector('.card-shipping').textContent.replace(/[^0-9.]/g, '')) || 0;
+          const shippingB = parseFloat(b.querySelector('.card-shipping').textContent.replace(/[^0-9.]/g, '')) || 0;
+          const conditionA = a.getAttribute('data-condition').toLowerCase();
+          const conditionB = b.getAttribute('data-condition').toLowerCase();
+  
+          switch (sortBy) {
+            case 'price-asc':
+              return priceA - priceB;
+            case 'price-desc':
+              return priceB - priceA;
+            case 'price-shipping-asc':
+              return (priceA + shippingA) - (priceB + shippingB);
+            case 'price-shipping-desc':
+              return (priceB + shippingB) - (priceA + shippingA);
+            case 'condition-asc':
+              return conditionA.localeCompare(conditionB);
+            case 'condition-desc':
+              return conditionB.localeCompare(conditionA);
+            default:
+              return 0;
           }
         });
   
+        // Display the filtered and sorted listings
+        const resultsContainer = document.querySelector('.card-listings-results');
+        resultsContainer.innerHTML = '';
+        filteredListings.forEach(listing => resultsContainer.appendChild(listing));
+  
         // Update the filtered count
-        filteredCountElement.textContent = filteredCount;
+        filteredCountElement.textContent = filteredListings.length;
       }
   
       function getSelectedFilters(containerId) {
@@ -268,7 +312,7 @@
       }
   
       // Initialize with all listings shown
-      filterListings();
+      filterAndSortListings();
     });
   </script>
   

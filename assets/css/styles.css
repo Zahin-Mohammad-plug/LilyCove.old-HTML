@@ -708,6 +708,40 @@
   margin-top: 20px;
 }
 
+.card-listings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.card-listings-sort {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.card-listings-sort label {
+  font-size: 1rem;
+  color: #DDD8B8;
+}
+
+#sort-by {
+  background-color: #7161a8;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-family: 'Oxanium', sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+#sort-by:hover {
+  background-color: #5a4b91;
+}
+
+
 /* Filter Styles */
 .card-listings-filter {
   width: 20%;
