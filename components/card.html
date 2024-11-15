@@ -259,8 +259,8 @@
           const condition = listing.getAttribute('data-condition');
           const merchant = listing.getAttribute('data-merchant');
           const location = listing.getAttribute('data-location');
-          const price = parseFloat(listing.querySelector('.card-price').textContent.replace('$', ''));
-          const shipping = parseFloat(listing.querySelector('.card-shipping').textContent.replace(/[^0-9.]/g, '')) || 0;
+          const price = parseFloat(listing.querySelector('.card-listings-price').textContent.replace('$', ''));
+          const shipping = parseFloat(listing.querySelector('.card-listings-shipping').textContent.replace(/[^0-9.]/g, '')) || 0;
   
           return (
             (selectedConditions.length === 0 || selectedConditions.includes(condition)) &&
@@ -272,10 +272,10 @@
   
         // Sort listings based on the selected criteria
         filteredListings.sort((a, b) => {
-          const priceA = parseFloat(a.querySelector('.card-price').textContent.replace('$', ''));
-          const priceB = parseFloat(b.querySelector('.card-price').textContent.replace('$', ''));
-          const shippingA = parseFloat(a.querySelector('.card-shipping').textContent.replace(/[^0-9.]/g, '')) || 0;
-          const shippingB = parseFloat(b.querySelector('.card-shipping').textContent.replace(/[^0-9.]/g, '')) || 0;
+          const priceA = parseFloat(a.querySelector('.card-listings-price').textContent.replace('$', ''));
+          const priceB = parseFloat(b.querySelector('.card-listings-price').textContent.replace('$', ''));
+          const shippingA = parseFloat(a.querySelector('.card-listings-shipping').textContent.replace(/[^0-9.]/g, '')) || 0;
+          const shippingB = parseFloat(b.querySelector('.card-listings-shipping').textContent.replace(/[^0-9.]/g, '')) || 0;
           const conditionA = a.getAttribute('data-condition').toLowerCase();
           const conditionB = b.getAttribute('data-condition').toLowerCase();
   
@@ -315,6 +315,6 @@
       filterAndSortListings();
     });
   </script>
-  
+
   
 </html>
