@@ -94,72 +94,78 @@
 
       <hr class="divider" />
       
-      <!-- Listings Section -->
-      <section class="card-listings">
-        <h2>Listings: 18 Results</h2>
-        <div class="card-listings-container">
-          <!-- Filter Section -->
-          <aside class="card-filter">
-            <h3>Filter</h3>
-            <div class="card-filter-category">
-              <h4>Condition</h4>
-              <label><input type="checkbox" /> Near Mint Holofoil</label>
-              <label><input type="checkbox" /> Lightly Played Holofoil</label>
-              <label><input type="checkbox" /> Moderately Played Holofoil</label>
-            </div>
-            <div class="card-filter-category">
-              <h4>Seller Location</h4>
-              <label><input type="checkbox" /> Ottawa, ON</label>
-              <label><input type="checkbox" /> Toronto, ON</label>
-              <label><input type="checkbox" /> Hamilton, ON</label>
-            </div>
-            <div class="card-filter-category">
-              <h4>Price</h4>
-              <div class="card-price-range">
-                <input type="text" placeholder="$0" />
-                <input type="text" placeholder="$300+" />
-              </div>
-            </div>
-            <div class="card-filter-category">
-              <h4>Sort</h4>
-              <label><input type="radio" name="sort" /> Price: Low to High</label>
-              <label><input type="radio" name="sort" /> Price: High to Low</label>
-              <label><input type="radio" name="sort" /> eBay First</label>
-            </div>
-          </aside>
-      
+<!-- Listings Section -->
+<section class="card-listings">
+  <h2>Listings: <span id="filtered-count">0</span> Results (<span id="total-count">0</span> Total)</h2>
+
+  <div class="card-listings-container">
+    <aside class="card-listings-filter">
+      <h3>Filter</h3>
+
+      <!-- Condition Filter -->
+      <div class="card-listings-filter-section" id="filter-conditions">
+        <h4>Condition</h4>
+        <!-- Checkboxes will be dynamically inserted here -->
+      </div>
+
+      <!-- Seller Location Filter -->
+      <div class="card-listings-filter-section" id="filter-locations">
+        <h4>Seller Location</h4>
+        <!-- Checkboxes will be dynamically inserted here -->
+      </div>
+
+      <!-- Merchant Filter -->
+      <div class="card-listings-filter-section" id="filter-merchants">
+        <h4>Merchants</h4>
+        <!-- Checkboxes will be dynamically inserted here -->
+      </div>
+
+      <!-- Price Range Filter -->
+      <div class="card-listings-filter-section" id="filter-price">
+        <h4>Price</h4>
+        <div class="card-listings-price-range">
+          <input type="number" id="min-price" placeholder="$0" />
+          <input type="number" id="max-price" placeholder="$300+" />
+          <div class="card-listings-price-labels">
+            <span>Min</span>
+            <span>Max</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
           <!-- Results Section -->
-          <div class="card-results">
-            <div class="card-listing-card">
-              <img src="/assets/images/listings/danireon-squirtle.png" alt="Lightly Played Holofoil" />
-              <div class="card-details">
+          <div class="card-listings-results">
+            <div class="card-listing-card" data-condition="Lightly Played" data-merchant="Danireon" data-location="Ottawa, ON">
+              <img src="/assets/images/listings/danireon-squirtle.png" alt="Lightly Played Holofoil" class="card-listings-thumbnail" />
+              <div class="card-listings-details">
                 <h3>Lightly Played Holofoil</h3>
-                <p>$17.65 + $13 shipping</p>
-                <p>Free Shipping Over $150</p>
-                <button class="card-button">View Deal</button>
+                <p class="card-listings-price">$17.65</p>
+                <p class="card-listings-shipping">+ $13 shipping</p>
               </div>
-              <div class="card-seller-info">
-                <img src="\assets\images\merchant-icons\danireon-logo.png" alt="Danireon" />
-                <p>Ottawa, ON</p>
+              <div class="card-listings-merchant-info">
+                <img src="\assets\images\merchant-icons\danireon-logo.png" alt="Danireon Logo" class="card-listings-merchant-icon" />
+                <p class="card-listings-location">Ottawa, ON</p>
+                <button class="card-listings-view-deal">View Deal</button>
               </div>
             </div>
-            <div class="card-listing-card">
-              <img src="/assets/images/listings/ebay-squirtle.png" alt="Near Mint" />
-              <div class="card-details">
+
+            <div class="card-listing-card" data-condition="Near Mint" data-merchant="eBay" data-location="Toronto, ON">
+              <img src="/assets/images/listings/ebay-squirtle.png" alt="Near Mint" class="card-listings-thumbnail" />
+              <div class="card-listings-details">
                 <h3>Near Mint</h3>
-                <p>$82.43 + $11.98 shipping</p>
-                <button class="card-button">View Deal</button>
+                <p class="card-listings-price">$82.43</p>
+                <p class="card-listings-shipping">+ $11.98 shipping</p>
               </div>
-              <div class="card-seller-info">
-                <img src="\assets\images\merchant-icons\ebay-logo.png" alt="eBay" />
-                <p>Hamilton, ON</p>
+              <div class="card-listings-merchant-info">
+                <img src="\assets\images\merchant-icons\ebay-logo.png" alt="eBay Logo" class="card-listings-merchant-icon" />
+                <p class="card-listings-location">Toronto, ON</p>
+                <button class="card-listings-view-deal">View Deal</button>
               </div>
             </div>
-            
           </div>
         </div>
       </section>
-
       <!-- Additional Information -->
       <section class="related-info">
         <h2>Related Cards</h2>
@@ -177,20 +183,94 @@
     </main>
   </body>
   <script>
-    document.querySelectorAll('.filter input').forEach(checkbox => {
-      checkbox.addEventListener('change', function() {
-        const filters = Array.from(document.querySelectorAll('.filter input:checked')).map(cb => cb.parentNode.textContent.trim());
-        const listings = document.querySelectorAll('.listing-card');
-    
+    document.addEventListener('DOMContentLoaded', function() {
+      const listings = document.querySelectorAll('.card-listing-card');
+      const filterConditions = new Set();
+      const filterMerchants = new Set();
+      const filterLocations = new Set();
+      const filteredCountElement = document.getElementById('filtered-count');
+      const totalCountElement = document.getElementById('total-count');
+  
+      // Elements for price filtering
+      const minPriceInput = document.getElementById('min-price');
+      const maxPriceInput = document.getElementById('max-price');
+  
+      // Populate filters based on available listings
+      listings.forEach(listing => {
+        filterConditions.add(listing.getAttribute('data-condition'));
+        filterMerchants.add(listing.getAttribute('data-merchant'));
+        filterLocations.add(listing.getAttribute('data-location'));
+      });
+  
+      // Render filter options
+      const renderFilterOptions = (containerId, filterSet) => {
+        const container = document.getElementById(containerId);
+        filterSet.forEach(filter => {
+          const label = document.createElement('label');
+          label.innerHTML = `<input type="checkbox" value="${filter}" /> ${filter}`;
+          container.appendChild(label);
+        });
+      };
+  
+      renderFilterOptions('filter-conditions', filterConditions);
+      renderFilterOptions('filter-merchants', filterMerchants);
+      renderFilterOptions('filter-locations', filterLocations);
+  
+      // Filtering logic
+      const filterCheckboxes = document.querySelectorAll('.card-listings-filter input[type="checkbox"]');
+      const totalListings = listings.length;
+      totalCountElement.textContent = totalListings;
+  
+      filterCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', filterListings);
+      });
+  
+      // Price range filtering
+      [minPriceInput, maxPriceInput].forEach(input => {
+        input.addEventListener('input', filterListings);
+      });
+  
+      function filterListings() {
+        const selectedConditions = getSelectedFilters('filter-conditions');
+        const selectedMerchants = getSelectedFilters('filter-merchants');
+        const selectedLocations = getSelectedFilters('filter-locations');
+        const minPrice = parseFloat(minPriceInput.value) || 0;
+        const maxPrice = parseFloat(maxPriceInput.value) || Infinity;
+  
+        let filteredCount = 0;
+  
         listings.forEach(listing => {
-          const text = listing.querySelector('h3').textContent;
-          if (filters.length === 0 || filters.some(filter => text.includes(filter))) {
+          const condition = listing.getAttribute('data-condition');
+          const merchant = listing.getAttribute('data-merchant');
+          const location = listing.getAttribute('data-location');
+          const price = parseFloat(listing.querySelector('.card-listings-price').textContent.replace('$', ''));
+  
+          if (
+            (selectedConditions.length === 0 || selectedConditions.includes(condition)) &&
+            (selectedMerchants.length === 0 || selectedMerchants.includes(merchant)) &&
+            (selectedLocations.length === 0 || selectedLocations.includes(location)) &&
+            price >= minPrice && price <= maxPrice
+          ) {
             listing.style.display = 'flex';
+            filteredCount++;
           } else {
             listing.style.display = 'none';
           }
         });
-      });
+  
+        // Update the filtered count
+        filteredCountElement.textContent = filteredCount;
+      }
+  
+      function getSelectedFilters(containerId) {
+        return Array.from(document.querySelectorAll(`#${containerId} input:checked`))
+          .map(checkbox => checkbox.value);
+      }
+  
+      // Initialize with all listings shown
+      filterListings();
     });
   </script>
+  
+  
 </html>
