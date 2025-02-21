@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CJSBHB1TS4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-CJSBHB1TS4');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/assets/images/icons/pageIcon2.png" type="image/png">
+  <title>Pokemon Expansion Sets</title>
+  <link rel="stylesheet" href="/assets/css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script type="module" src="/assets/js/firebase-init.js"></script>
+  <script type="module">
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+  
+    const db = getFirestore();
+  
+    // Function to load Series with caching
+    async function loadSeries() {
+      const seriesGrid = document.querySelector('.expansion-grid.series');
+      seriesGrid.innerHTML = ''; // Clear any existing content
+
+      // Check for cached data
+      const cachedSeries = getFromLocalStorage('seriesData');
+      if (cachedSeries) {
+        console.log('Loading series from cache');
+        renderSeries(cachedSeries, seriesGrid); // Render using cached data
+      } else {
+        console.log('Fetching series from Firestore');
+        // Fetch from Firestore if no cached data
+        const seriesCollection = collection(db, 'series');
+        const seriesSnapshot = await getDocs(seriesCollection);
+        const seriesData = seriesSnapshot.docs.map(doc => {
+          return { id: doc.id, ...doc.data() };
+        });
+
+        // Save to localStorage
+        saveToLocalStorage('seriesData', seriesData);
+
+        renderSeries(seriesData, seriesGrid); // Render using fetched data
+      }
+    }
+
+    // Function to load Sets with caching
+    async function loadSets() {
+      const setsGrid = document.querySelector('.expansion-grid.sets');
+      setsGrid.innerHTML = ''; // Clear sets content
+
+      // Check for cached data
+      const cachedSets = getFromLocalStorage('setsData');
+      if (cachedSets) {
+        console.log('Loading sets from cache');
+        renderSets(cachedSets, setsGrid); // Render using cached data
+      } else {
+        console.log('Fetching sets from Firestore');
+        // Fetch from Firestore if no cached data
+        const setsCollection = collection(db, 'sets');
+        const setsSnapshot = await getDocs(setsCollection);
+        const setsData = setsSnapshot.docs.map(doc => {
+          return { id: doc.id, ...doc.data() };
+        });
+
+        // Save to localStorage
+        saveToLocalStorage('setsData', setsData);
+
+        renderSets(setsData, setsGrid); // Render using fetched data
+      }
+    }
+
+    // Helper function to render series data
+    function renderSeries(seriesData, container) {
+      seriesData.forEach(series => {
+        const seriesElement = document.createElement('a');
+        seriesElement.href = `cards.html?series=${encodeURIComponent(series.id)}`;
+        seriesElement.classList.add('expansion-item');
+
+        const img = document.createElement('img');
+        img.src = series.imageUrl || '/path/to/placeholder-logo.png';
+        img.alt = series.id;
+        seriesElement.appendChild(img);
+
+        const nameElement = document.createElement('p');
+        nameElement.textContent = series.name;
+        seriesElement.appendChild(nameElement);
+
+        container.appendChild(seriesElement);
+      });
+    }
+
+    // Helper function to render sets data
+    function renderSets(setsData, container) {
+      setsData.forEach(set => {
+        const setElement = document.createElement('a');
+        setElement.href = `cards.html?set=${encodeURIComponent(set.id)}`;
+        setElement.classList.add('expansion-item');
+
+        const img = document.createElement('img');
+        img.src = set.imageUrls.logo || '/path/to/placeholder-logo.png';
+        img.alt = set.name;
+        setElement.appendChild(img);
+
+        const nameElement = document.createElement('p');
+        nameElement.textContent = set.name;
+        setElement.appendChild(nameElement);
+
+        container.appendChild(setElement);
+      });
+    }
+
+    // Helper functions for localStorage
+    function saveToLocalStorage(key, data) {
+      localStorage.setItem(key, JSON.stringify(data));
+    }
+
+    function getFromLocalStorage(key) {
+      const data = localStorage.getItem(key);
+      return data ? JSON.parse(data) : null;
+    }
+    
+    // Toggle visibility and load data when needed
+    document.addEventListener('DOMContentLoaded', () => {
+      const seriesLink = document.querySelector('.language-options a.series-link');
+      const setsLink = document.querySelector('.language-options a.sets-link');
+      const seriesGrid = document.querySelector('.expansion-grid.series');
+      const setsGrid = document.querySelector('.expansion-grid.sets');
+  
+      // Load Series by default
+      loadSeries();
+  
+      // Event listener for Series link
+      seriesLink.addEventListener('click', () => {
+        seriesGrid.style.display = 'grid';
+        setsGrid.style.display = 'none';
+        seriesLink.classList.add('active');
+        setsLink.classList.remove('active');
+      });
+  
+      // Event listener for Sets link
+      setsLink.addEventListener('click', () => {
+        setsGrid.style.display = 'grid';
+        seriesGrid.style.display = 'none';
+        setsLink.classList.add('active');
+        seriesLink.classList.remove('active');
+  
+        // Call loadSets unconditionally
+        loadSets();
+      });
+    });
+  </script>
+  
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="/assets/images/icons/pagelogo.png" alt="LilyCove Logo" style="height: 50px;">
+    </div>
+    <input type="text" placeholder="Search for cards, sets, tcg">
+    <nav>
+      <a href="/index.html">Home</a>
+      <a href="/components/sets.html">Pokemon</a>
+    </nav>
+    <div class="user-icons">
+      <!-- <i class="fas fa-user"></i>
+      <i class="fas fa-sign-out-alt"></i>
+      <i class="fas fa-bell"></i> -->
+    </div>
+  </header>
+
+
+  <main>
+    <section class="expansion-header">
+      <h1>Pokemon Expansion Sets</h1>
+      <div class="language-options">
+        <a href="#" class="active series-link">Series</a>
+        <a href="#" class="sets-link">Sets</a>
+      </div>
+      <hr class="divider">
+    </section>
+
+    <section class="expansion-grid series">
+      <!-- Series will load first -->
+    </section>
+
+    <section class="expansion-grid sets">
+      <!-- Sets will load here but hidden by default -->
+    </section>
+  </main>
+</body>
+</html>

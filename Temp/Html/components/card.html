@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-CJSBHB1TS4"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-CJSBHB1TS4');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" href="/assets/images/icons/pageIcon2.png" type="image/png">
+    <title>Loading... - Lily Cove</title> <!-- Initial title placeholder -->
+    <link rel="stylesheet" href="/assets/css/styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@400;500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <script type="module" src="/assets/js/firebase-init.js"></script>
+    <script type="module">
+      import { getFirestore, doc, getDoc, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-firestore.js";
+
+      // Initialize Firestore
+      const db = getFirestore();
+
+      async function loadCardData() {
+        // Extract the card ID from the URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const cardId = urlParams.get('id');
+
+        if (!cardId) {
+          console.error('No cardId found in the URL');
+          return;
+        }
+
+        try {
+          // Fetch the card data from Firestore
+          const cardDocRef = doc(db, 'cards', cardId);
+          const cardDoc = await getDoc(cardDocRef);
+
+          if (cardDoc.exists()) {
+            const cardData = cardDoc.data();
+
+            // Update the title of the page
+            document.title = `${cardData.name} ${cardData.number} - LilyCove`;
+
+            // Update the card information on the page
+            document.querySelector('.card-text h1').textContent = cardData.name;
+            document.querySelector('.card-text p').textContent = `${cardData.supertype} - ${cardData.set.name}`;
+            document.querySelector('.card-text p:nth-child(3)').textContent = `${cardData.rarity} - ${cardData.number}/${cardData.set.printedTotal}`;
+
+            // Update the card image
+            const cardImage = document.querySelector('.card-image');
+            cardImage.src = cardData.images?.large || '/path/to/placeholder-card.png';
+            cardImage.alt = cardData.name;
+
+            // Load related cards
+            loadRelatedCards(cardData);
+          } else {
+            console.error('No such document!');
+          }
+        } catch (error) {
+          console.error('Error fetching card data from Firestore:', error);
+        }
+      }
+
+      async function loadRelatedCards(cardData) {
+        const relatedCardsContainer = document.querySelector('.related-cards');
+        relatedCardsContainer.innerHTML = ''; // Clear existing content
+
+        try {
+          const relatedQueries = [];
+
+          // Fetch cards in the evolutionary line
+          if (cardData.evolvesFrom) {
+            relatedQueries.push(query(collection(db, 'cards'), where('name', '==', cardData.evolvesFrom)));
+          }
+          if (cardData.evolvesTo && cardData.evolvesTo.length > 0) {
+            cardData.evolvesTo.forEach(evo => {
+              relatedQueries.push(query(collection(db, 'cards'), where('name', '==', evo)));
+            });
+          }
+
+          // Fetch other versions from different sets
+          relatedQueries.push(query(collection(db, 'cards'), where('name', '==', cardData.name), where('set.id', '!=', cardData.set.id)));
+
+          const relatedCards = await Promise.all(relatedQueries.map(q => getDocs(q)));
+
+          relatedCards.forEach(querySnapshot => {
+            querySnapshot.forEach(doc => {
+              const relatedCardData = doc.data();
+              const relatedCardElement = document.createElement('div');
+              relatedCardElement.classList.add('related-card');
+
+              relatedCardElement.innerHTML = `
+                <img src="${relatedCardData.images?.small || '/path/to/placeholder-card.png'}" alt="${relatedCardData.name}">
+                <h3>${relatedCardData.name}</h3>
+              `;
+
+              relatedCardsContainer.appendChild(relatedCardElement);
+            });
+          });
+        } catch (error) {
+          console.error('Error fetching related cards:', error);
+        }
+      }
+
+      // Load card data on page load
+      window.onload = loadCardData;
+    </script>
+    <link rel="icon" href="/assets/images/icons/pageIcon2.png" type="image/png">
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <img src="\assets\images\icons\pagelogo.png" alt="LilyCove Logo" style="height: 50px;">
+      </div>
+      <input type="text" placeholder="Search for cards, sets, tcg" />
+      <nav>
+        <a href="\index.html">Home</a>
+        <a href="\components\sets.html">Pokemon</a>
+      </nav>
+      <div class="user-icons">
+        <!-- <i class="fas fa-user"></i>
+        <i class="fas fa-sign-out-alt"></i>
+        <i class="fas fa-bell"></i> -->
+      </div>
+    </header>
+
+    <main>
+      <!-- Card Information Section -->
+      <section class="card-info">
+        <div class="card-details">
+          <div class="card-text">
+            <h1>Card Name</h1>
+            <p>Card Type - Set Name</p>
+            <p>Rarity - Card Number</p>
+          </div>
+        </div>
+      </section>
+      <hr class="divider">
+
+      <div class="card-data-container">
+        <div class="card-image-container">
+          <img src="/path/to/placeholder-card.png" alt="Card Image" class="card-image">
+        </div>
+
+        <section class="price-history">
+          <h2>Price History</h2>
+          <div class="chart">
+            <!-- Placeholder for the price history chart -->
+          </div>
+          <div class="history-controls">
+            <button>1M</button>
+            <button>3M</button>
+            <button>6M</button>
+            <button>1Y</button>
+          </div>
+        </section>
+
+        <section class="card-previous-sales">
+          <h2>Previous Sales</h2>
+          <div class="sales-list">
+            <!-- Previous sales will be dynamically loaded here -->
+          </div>
+        </section>
+      </div>
+
+      <hr class="divider" />
+      
+<!-- Listings Section -->
+<section class="card-listings">
+  <div class="card-listings-header">
+    <h2>Listings: <span id="filtered-count">0</span> Results (<span id="total-count">0</span> Total)</h2>
+    <div class="card-listings-sort">
+      <label for="sort-by">Sort By:</label>
+      <select id="sort-by">
+        <option value="price-asc">Price (Low to High)</option>
+        <option value="price-desc">Price (High to Low)</option>
+        <option value="price-shipping-asc">Price + Shipping (Low to High)</option>
+        <option value="price-shipping-desc">Price + Shipping (High to Low)</option>
+        <option value="condition-asc">Condition (A to Z)</option>
+        <option value="condition-desc">Condition (Z to A)</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="card-listings-container">
+    <aside class="card-listings-filter">
+      <h3>Filter</h3>
+
+      <!-- Condition Filter -->
+      <div class="card-listings-filter-section" id="filter-conditions">
+        <h4>Condition</h4>
+        <!-- Checkboxes will be dynamically inserted here -->
+      </div>
+
+      <!-- Seller Location Filter -->
+      <div class="card-listings-filter-section" id="filter-locations">
+        <h4>Seller Location</h4>
+        <!-- Checkboxes will be dynamically inserted here -->
+      </div>
+
+      <!-- Merchant Filter -->
+      <div class="card-listings-filter-section" id="filter-merchants">
+        <h4>Merchants</h4>
+        <!-- Checkboxes will be dynamically inserted here -->
+      </div>
+
+      <!-- Price Range Filter -->
+      <div class="card-listings-filter-section" id="filter-price">
+        <h4>Price</h4>
+        <div class="card-listings-price-range">
+          <input type="number" id="min-price" placeholder="$0" />
+          <input type="number" id="max-price" placeholder="$300+" />
+          <div class="card-listings-price-labels">
+            <span>Min</span>
+            <span>Max</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+          <!-- Results Section -->
+          <div class="card-listings-results">
+            <div class="card-listing-card" data-condition="Lightly Played" data-merchant="Danireon" data-location="Ottawa, ON">
+              <img src="/assets/images/listings/danireon-squirtle.png" alt="Lightly Played Holofoil" class="card-listings-thumbnail" />
+              <div class="card-listings-details">
+                <h3>Lightly Played Holofoil</h3>
+                <p class="card-listings-price">$17.65</p>
+                <p class="card-listings-shipping">+ $13 shipping</p>
+              </div>
+              <div class="card-listings-merchant-info">
+                <img src="\assets\images\merchant-icons\danireon-logo.png" alt="Danireon Logo" class="card-listings-merchant-icon" />
+                <p class="card-listings-location">Ottawa, ON</p>
+                <button class="card-listings-view-deal">View Deal</button>
+              </div>
+            </div>
+
+            <div class="card-listing-card" data-condition="Near Mint" data-merchant="eBay" data-location="Toronto, ON">
+              <img src="/assets/images/listings/ebay-squirtle.png" alt="Near Mint" class="card-listings-thumbnail" />
+              <div class="card-listings-details">
+                <h3>Near Mint</h3>
+                <p class="card-listings-price">$82.43</p>
+                <p class="card-listings-shipping">+ $11.98 shipping</p>
+              </div>
+              <div class="card-listings-merchant-info">
+                <img src="\assets\images\merchant-icons\ebay-logo.png" alt="eBay Logo" class="card-listings-merchant-icon" />
+                <p class="card-listings-location">Toronto, ON</p>
+                <button class="card-listings-view-deal">View Deal</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Related Cards Section -->
+      <section class="related-info">
+        <h2>Related Cards</h2>
+        <div class="related-cards">
+          <!-- Related cards will be dynamically loaded here -->
+        </div>
+      </section>
+    </main>
+  </body>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const listings = Array.from(document.querySelectorAll('.card-listing-card'));
+      const filterConditions = new Set();
+      const filterMerchants = new Set();
+      const filterLocations = new Set();
+      const filteredCountElement = document.getElementById('filtered-count');
+      const totalCountElement = document.getElementById('total-count');
+      const sortBySelect = document.getElementById('sort-by');
+  
+      // Elements for price filtering
+      const minPriceInput = document.getElementById('min-price');
+      const maxPriceInput = document.getElementById('max-price');
+  
+      // Populate filters based on available listings
+      listings.forEach(listing => {
+        filterConditions.add(listing.getAttribute('data-condition'));
+        filterMerchants.add(listing.getAttribute('data-merchant'));
+        filterLocations.add(listing.getAttribute('data-location'));
+      });
+  
+      // Render filter options
+      const renderFilterOptions = (containerId, filterSet) => {
+        const container = document.getElementById(containerId);
+        filterSet.forEach(filter => {
+          const label = document.createElement('label');
+          label.innerHTML = `<input type="checkbox" value="${filter}" /> ${filter}`;
+          container.appendChild(label);
+        });
+      };
+  
+      renderFilterOptions('filter-conditions', filterConditions);
+      renderFilterOptions('filter-merchants', filterMerchants);
+      renderFilterOptions('filter-locations', filterLocations);
+  
+      // Filtering logic
+      const filterCheckboxes = document.querySelectorAll('.card-listings-filter input[type="checkbox"]');
+      const totalListings = listings.length;
+      totalCountElement.textContent = totalListings;
+  
+      filterCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', filterAndSortListings);
+      });
+  
+      // Price range filtering
+      [minPriceInput, maxPriceInput].forEach(input => {
+        input.addEventListener('input', filterAndSortListings);
+      });
+  
+      // Sorting logic
+      sortBySelect.addEventListener('change', filterAndSortListings);
+  
+      function filterAndSortListings() {
+        const selectedConditions = getSelectedFilters('filter-conditions');
+        const selectedMerchants = getSelectedFilters('filter-merchants');
+        const selectedLocations = getSelectedFilters('filter-locations');
+        const minPrice = parseFloat(minPriceInput.value) || 0;
+        const maxPrice = parseFloat(maxPriceInput.value) || Infinity;
+        const sortBy = sortBySelect.value;
+  
+        let filteredListings = listings.filter(listing => {
+          const condition = listing.getAttribute('data-condition');
+          const merchant = listing.getAttribute('data-merchant');
+          const location = listing.getAttribute('data-location');
+          const price = parseFloat(listing.querySelector('.card-listings-price').textContent.replace('$', ''));
+          const shipping = parseFloat(listing.querySelector('.card-listings-shipping').textContent.replace(/[^0-9.]/g, '')) || 0;
+  
+          return (
+            (selectedConditions.length === 0 || selectedConditions.includes(condition)) &&
+            (selectedMerchants.length === 0 || selectedMerchants.includes(merchant)) &&
+            (selectedLocations.length === 0 || selectedLocations.includes(location)) &&
+            price >= minPrice && price <= maxPrice
+          );
+        });
+  
+        // Sort listings based on the selected criteria
+        filteredListings.sort((a, b) => {
+          const priceA = parseFloat(a.querySelector('.card-listings-price').textContent.replace('$', ''));
+          const priceB = parseFloat(b.querySelector('.card-listings-price').textContent.replace('$', ''));
+          const shippingA = parseFloat(a.querySelector('.card-listings-shipping').textContent.replace(/[^0-9.]/g, '')) || 0;
+          const shippingB = parseFloat(b.querySelector('.card-listings-shipping').textContent.replace(/[^0-9.]/g, '')) || 0;
+          const conditionA = a.getAttribute('data-condition').toLowerCase();
+          const conditionB = b.getAttribute('data-condition').toLowerCase();
+  
+          switch (sortBy) {
+            case 'price-asc':
+              return priceA - priceB;
+            case 'price-desc':
+              return priceB - priceA;
+            case 'price-shipping-asc':
+              return (priceA + shippingA) - (priceB + shippingB);
+            case 'price-shipping-desc':
+              return (priceB + shippingB) - (priceA + shippingA);
+            case 'condition-asc':
+              return conditionA.localeCompare(conditionB);
+            case 'condition-desc':
+              return conditionB.localeCompare(conditionA);
+            default:
+              return 0;
+          }
+        });
+  
+        // Display the filtered and sorted listings
+        const resultsContainer = document.querySelector('.card-listings-results');
+        resultsContainer.innerHTML = '';
+        filteredListings.forEach(listing => resultsContainer.appendChild(listing));
+  
+        // Update the filtered count
+        filteredCountElement.textContent = filteredListings.length;
+      }
+  
+      function getSelectedFilters(containerId) {
+        return Array.from(document.querySelectorAll(`#${containerId} input:checked`))
+          .map(checkbox => checkbox.value);
+      }
+  
+      // Initialize with all listings shown
+      filterAndSortListings();
+    });
+  </script>
+
+
+</html>
